@@ -46,12 +46,13 @@ while(ser.isOpen()):
 	# check if node is in dict and push data to script
 	if NodeID in NodesDict:
 		# calc delta since last ID received
-		timestamp  = int(time.time())
-		deltaT =  timestamp - NodesDict[NodeID][2]
-		NodesDict[NodeID][2] = timestamp
+		#timestamp  = int(time.time())
+		#deltaT =  timestamp - NodesDict[NodeID][2]
+		#NodesDict[NodeID][2] = timestamp
 		#
 		sh_command = NodesDict[NodeID][1] + " " + line
-		print("ID: " + str(NodeID) + " - dt: " + str(deltaT) + "s")
+		#print("ID: " + str(NodeID) + " - dt: " + str(deltaT) + "s")
+		#print(line)
 		os.system(sh_command)
 	else:
 		print("WARNING - Node ID: " + NodeID + " received but not configured in dictionary")
