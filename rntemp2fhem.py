@@ -25,17 +25,14 @@ if(len(sys.argv) == 2):
 	
 	temp_byte_lo = int(line[20:22], 16)
 	temp_byte_hi = int(line[22:24], 16)
-	print(line[22:24] + "  " + line[20:22])
+	#print(line[22:24] + "  " + line[20:22])
 	if temp_byte_hi > 16:
 		offset = 6553.5
 	else:
 		offset = 0
 
-	
-	temp = float( ((256  * temp_byte_hi) + temp_byte_lo ) - offset) / 10
-	
-	humi = float(  256  * int(line[16:18], 16) + int(line[14:16], 16 ) ) / 10
-	
+	temp = float( ((256  * temp_byte_hi) + temp_byte_lo ) - offset) / 10	
+	humi = float(   256  * int(line[16:18], 16) + int(line[14:16], 16 ) ) / 10
 	rssi = float( ( -1  * int(line[26:28], 16)) / 2)
 	# debug output
 	print("T: " + str(temp) + '°C | H: ' + str(humi) + "% | rssi: " + str(rssi) + "db" )
