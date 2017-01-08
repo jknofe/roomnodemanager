@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 import serial
 import sys
 import os
@@ -7,7 +8,7 @@ import time
 
 # known devices, configure ID, name and script to process data
 NodesDict = {
-				'05':	["RoomNode5",	"python /home/pi/git/roomnodemanger/rntemp2fhem.py" , 0],
+				'05':	["RoomNode5",	"python /home/pi/git/roomnodemanager/rntemp2fhem.py" , 0],
 				'14':	["BattMon RX8",	"perl /home/pi/git/battmon/read_battery.pl"			, 0]
 			}
 
@@ -46,12 +47,13 @@ while(ser.isOpen()):
 	# check if node is in dict and push data to script
 	if NodeID in NodesDict:
 		# calc delta since last ID received
-		#timestamp  = int(time.time())
-		#deltaT =  timestamp - NodesDict[NodeID][2]
-		#NodesDict[NodeID][2] = timestamp
+		timestamp  = int(time.time())
+		deltaT =  timestamp - NodesDict[NodeID][2]
+		NodesDict[NodeID][2] = timestamp
 		#
+		print("ID: " + str(NodeID) + " - dt: " + str(deltaT) + "s")
 		sh_command = NodesDict[NodeID][1] + " " + line
-		#print("ID: " + str(NodeID) + " - dt: " + str(deltaT) + "s")
+		#
 		#print(line)
 		os.system(sh_command)
 	else:
